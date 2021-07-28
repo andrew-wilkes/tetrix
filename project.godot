@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "Controller",
+"language": "GDScript",
+"path": "res://Controller.gd"
+}, {
+"base": "Node2D",
 "class": "TShape",
 "language": "GDScript",
 "path": "res://TShape.gd"
 } ]
 _global_script_class_icons={
+"Controller": "",
 "TShape": ""
 }
 
