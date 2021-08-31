@@ -15,12 +15,18 @@ _global_script_classes=[ {
 "path": "res://Controller.gd"
 }, {
 "base": "Node2D",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://Grid.gd"
+}, {
+"base": "Node2D",
 "class": "TShape",
 "language": "GDScript",
 "path": "res://TShape.gd"
 } ]
 _global_script_class_icons={
 "Controller": "",
+"Grid": "",
 "TShape": ""
 }
 

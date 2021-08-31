@@ -1,5 +1,7 @@
 extends Node2D
 
+# Test this script by running the Controller scene by itself and press the keyboard keys
+
 class_name Controller
 
 # EVENTS
