@@ -75,13 +75,18 @@ func move_rows(from, to):
 ### Tests ###
 
 func run_tests():
-	assert(grid.size() == size.x * size. y)
+	size = Vector2(10, 20)
+	clear()
+	test_clear()
 	test_get_grid_index()
 	test_cell_full()
 	test_get_full_rows()
 	test_ok_to_move()
 	test_add_shape_to_grid()
 	print("Done")
+
+func test_clear():
+	assert(grid.size() == size.x * size. y)
 
 func test_cell_full():
 	grid[0] = false
