@@ -13,8 +13,6 @@ func start_game():
 	Grid.clear()
 	# Get shape
 	tshape = TShapes.generate()
-	# Add to grid
-	Grid.add_shape_to_grid(tshape, Grid.size.x / 2, 0)
 	# Show in Area
 	$Area.add_child(tshape)
 	tshape.move_to(4, -2)
