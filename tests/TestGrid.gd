@@ -12,6 +12,7 @@ func run_tests():
 	test_get_full_rows()
 	test_ok_to_move()
 	test_add_shape_to_grid()
+	test_remove_rows()
 	print("Done")
 
 func test_clear():
@@ -74,3 +75,29 @@ func test_add_shape_to_grid():
 		if grid[idx]:
 			sum += idx
 	assert(sum == 11 + 12 + 21 + 22)
+
+func test_remove_rows():
+	clear()
+	# Add row at top of grid
+	for idx in size.x:
+		grid[idx] = true
+	remove_rows([0])
+	var n = 0
+	for idx in size.x:
+		n += int(grid[idx] == true)
+	assert(n == 0)
+	# Add 3 rows at top of grid
+	for idx in size.x * 3:
+		grid[idx] = true
+	remove_rows([1, 2])
+	# Now only row 3 should contain true values
+	n = 0
+	for idx in size.x:
+		n += int(grid[idx] == true)
+	assert(n == 0)
+	for idx in size.x:
+		n += int(grid[idx + size.x] == true)
+	assert(n == 0)
+	for idx in size.x:
+		n += int(grid[idx + size.x * 2] == false)
+	assert(n == 0)

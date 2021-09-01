@@ -62,12 +62,13 @@ func remove_rows(rows: Array):
 		num_rows_in_block += 1
 		var row2 = rows.pop_front()
 		if row2 == null or row2 > row1 + 1:
-			move_rows(row1 - num_rows_in_block, row1)
+			move_rows(row1, num_rows_in_block)
 			num_rows_in_block = 0
 		row1 = row2
 
-func move_rows(from, to):
-	for row in range(from, to):
+func move_rows(to, n):
+	# Scan the rows to be moved from `to` to 0
+	for row in range(to, -1, -1):
 		for x in size.x:
-			var v = false if row < 0 else grid[from * size.x + x]
-			grid[to * size.x + x] = v
+			var v = false if row - n < 0 else grid[(row - n) * size.x + x]
+			grid[row * size.x + x] = v
