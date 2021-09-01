@@ -18,19 +18,31 @@ export var tick_period = 1.0
 var game_state = READY
 var side_moving_state = DEFAULT
 var down_moving_speed = DEFAULT
+var timer1
+var timer2
+
+func _ready():
+	timer1 = Timer.new()
+	timer1.one_shot = true
+	timer1.connect("timeout", self, "handle_state", [TIMEOUT_1, false])
+	add_child(timer1)
+	timer2 = Timer.new()
+	timer2.one_shot = true
+	timer2.connect("timeout", self, "handle_state", [TIMEOUT_2, false])
+	add_child(timer2)
 
 func handle_state(event_code, pressed):
 	match game_state:
 		READY:
 			if event_code == KEY_SPACE and pressed:
-				$Timer1.start(tick_period)
+				timer1.start(tick_period)
 				start_game()
 				game_state = PLAYING
 			if event_code == KEY_ESCAPE and pressed:
 				quit_game()
 		PAUSED:
 			if event_code == KEY_SPACE and pressed:
-				$Timer1.start(tick_period)
+				timer1.start(tick_period)
 				resume_game()
 				game_state = PLAYING
 			if event_code == KEY_ESCAPE and pressed:
@@ -40,7 +52,7 @@ func handle_state(event_code, pressed):
 			match event_code:
 				KEY_LEFT:
 					if pressed:
-						$Timer2.start(side_move_delay)
+						timer2.start(side_move_delay)
 						side_moving_state = LEFT
 						start_moving_left()
 					else:
@@ -48,7 +60,7 @@ func handle_state(event_code, pressed):
 						side_moving_state = DEFAULT
 				KEY_RIGHT:
 					if pressed:
-						$Timer2.start(side_move_delay)
+						timer2.start(side_move_delay)
 						side_moving_state = RIGHT
 						start_moving_right()
 					else:
@@ -65,27 +77,27 @@ func handle_state(event_code, pressed):
 						hard_drop()
 				KEY_DOWN:
 					if pressed:
-						$Timer1.start(soft_drop_period)
+						timer1.start(soft_drop_period)
 						down_moving_speed = FAST
 					else:
 						down_moving_speed = DEFAULT
 				KEY_ESCAPE:
-					$Timer1.stop()
+					timer1.stop()
 					game_state = PAUSED
 					pause_game()
 				TIMEOUT_1:
 					if down_moving_speed == FAST:
-						$Timer1.start(soft_drop_period)
+						timer1.start(soft_drop_period)
 					else:
-						$Timer1.start(tick_period)
+						timer1.start(tick_period)
 					move_down()
 				TIMEOUT_2:
 					match side_moving_state:
 						LEFT:
-							$Timer2.start(side_move_period)
+							timer2.start(side_move_period)
 							fast_move_left()
 						RIGHT:
-							$Timer2.start(side_move_period)
+							timer2.start(side_move_period)
 							fast_move_right()
 
 var keys = {}
@@ -147,9 +159,3 @@ func pause_game():
 
 func quit_game():
 	print("quit_game")
-
-func _on_Timer1_timeout():
-	handle_state(TIMEOUT_1, false)
-
-func _on_Timer2_timeout():
-	handle_state(TIMEOUT_2, false)
