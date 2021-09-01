@@ -75,9 +75,22 @@ func move(dx, dy):
 	position += Vector2(dx, dy) * step_size
 	xpos += dx
 	ypos += dy
+	set_tile_visibility()
 
 
 func move_to(x, y):
 	position = Vector2(x, y) * step_size
 	xpos = x
 	ypos = y
+	set_tile_visibility()
+
+
+# Hide tiles that are above the area
+func set_tile_visibility():
+	if ypos < 0:
+		var hidden_depth = step_size * -ypos
+		for node in get_children():
+			if node.position.y >= hidden_depth:
+				node.visible = true
+			else:
+				node.visible = false
