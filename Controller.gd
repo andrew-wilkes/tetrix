@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 # Test this script by running the Controller scene by itself and press the keyboard keys
 
@@ -67,9 +67,11 @@ func handle_state(event_code, pressed):
 						stop_moving_right()
 						side_moving_state = DEFAULT
 				KEY_Z:
-					try_rotate_left()
+					if pressed:
+						try_rotate_left()
 				KEY_X:
-					try_rotate_right()
+					if pressed:
+						try_rotate_right()
 				KEY_C:
 					hold_piece()
 				KEY_SPACE:

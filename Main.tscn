@@ -5,7 +5,19 @@
 [node name="Main" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -3.0
+margin_top = 2.0
+margin_right = -3.0
+margin_bottom = 2.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area" type="ColorRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+color = Color( 0, 0.290196, 0.545098, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -2,5 +2,8 @@
 
 [ext_resource path="res://Controller.gd" type="Script" id=1]
 
-[node name="Controller" type="Node2D"]
+[node name="Controller" type="Control"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

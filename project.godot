@@ -9,31 +9,19 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
+"base": "Control",
 "class": "Controller",
 "language": "GDScript",
 "path": "res://Controller.gd"
 }, {
 "base": "Node2D",
-"class": "Grid",
-"language": "GDScript",
-"path": "res://Grid.gd"
-}, {
-"base": "Node2D",
 "class": "TShape",
 "language": "GDScript",
 "path": "res://TShape.gd"
-}, {
-"base": "Node2D",
-"class": "TShapes",
-"language": "GDScript",
-"path": "res://TShapes.gd"
 } ]
 _global_script_class_icons={
 "Controller": "",
-"Grid": "",
-"TShape": "",
-"TShapes": ""
+"TShape": ""
 }
 
 [application]
@@ -41,6 +29,11 @@ _global_script_class_icons={
 config/name="Tetrix"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+TShapes="*res://TShapes.tscn"
+Grid="*res://Grid.gd"
 
 [physics]
 

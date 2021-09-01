@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://TShapes.gd" type="Script" id=1]
 [ext_resource path="res://TShape.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tile.png" type="Texture" id=3]
 
 [node name="TShapes" type="Node2D"]
 script = ExtResource( 1 )
@@ -12,35 +11,30 @@ cells = "oox
 xxx
 ooo"
 color = Color( 0.898039, 0.486275, 0, 1 )
-tile_texture = ExtResource( 3 )
 
 [node name="J" parent="." instance=ExtResource( 2 )]
 cells = "xoo
 xxx
 ooo"
 color = Color( 0, 0.345098, 0.745098, 1 )
-tile_texture = ExtResource( 3 )
 
 [node name="S" parent="." instance=ExtResource( 2 )]
 cells = "oxx
 xxo
 ooo"
 color = Color( 0.054902, 0.698039, 0, 1 )
-tile_texture = ExtResource( 3 )
 
 [node name="Z" parent="." instance=ExtResource( 2 )]
 cells = "xxo
 oxx
 ooo"
 color = Color( 0.74902, 0.0392157, 0.0392157, 1 )
-tile_texture = ExtResource( 3 )
 
 [node name="T" parent="." instance=ExtResource( 2 )]
 cells = "oxo
 xxx
 ooo"
 color = Color( 0.52549, 0, 0.764706, 1 )
-tile_texture = ExtResource( 3 )
 
 [node name="I" parent="." instance=ExtResource( 2 )]
 cells = "oooo
@@ -48,10 +42,8 @@ xxxx
 oooo
 oooo"
 color = Color( 0.0392157, 0.74902, 0.682353, 1 )
-tile_texture = ExtResource( 3 )
 
 [node name="C" parent="." instance=ExtResource( 2 )]
 cells = "xx
 xx"
 color = Color( 0.866667, 0.831373, 0, 1 )
-tile_texture = ExtResource( 3 )

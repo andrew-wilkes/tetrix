@@ -1,8 +1,6 @@
 extends Node2D
 
-class_name Grid
-
-export var size = Vector2(10, 20)
+var size = Vector2(10, 20)
 
 var grid: Array
 

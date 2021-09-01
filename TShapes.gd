@@ -1,11 +1,11 @@
 extends Node2D
 
-class_name TShapes
-
 var tshapes = []
 var mass = 0.0
 
 func _ready():
+	if get_parent().name == "root":
+		hide()
 	for node in get_children():
 		# Cast the node variant type to a type of TShape
 		var tshape: TShape = node
@@ -20,5 +20,5 @@ func generate():
 		var tshape: TShape = t
 		pick -= tshape.weight
 		if pick <= 0.0:
-			return tshape.get_shape()
+			return tshape.duplicate()
 	assert(false) # Should never reach this point

@@ -13,6 +13,8 @@ var step_size
 var edge_pos
 var coordinate_matrices = [[-1,1], [-1,0,1],[-2,-1,1,2]]
 var tile
+var xpos = 0
+var ypos = 0
 
 func _ready():
 	# Parse cells data
@@ -23,15 +25,16 @@ func _ready():
 			row.append(ch == "x")
 		tile_map.append(row)
 	tsize = int(max(tile_map.size(), tile_map[0].size()))
-	# Create Tile
-	tile = Sprite.new()
-	tile.texture = tile_texture
-	tile.modulate = color
 	# Evaluate useful vars
 	step_size = tile_texture.get_size().x
 	edge_pos = step_size * tsize / 2.0
-	# Add the tiles as child nodes
-	set_tile_positions(true)
+	if get_child_count() == 0:
+		# Create Tile
+		tile = Sprite.new()
+		tile.texture = tile_texture
+		tile.modulate = color
+		tile.centered = false
+		set_tile_positions(true)
 
 
 func set_tile_positions(add_tiles = false):
@@ -66,3 +69,15 @@ func rotate(left = true):
 				rotated_tiles[y][x] = tile_map[yy][y]
 	tile_map = rotated_tiles
 	set_tile_positions(false)
+
+
+func move(dx, dy):
+	position += Vector2(dx, dy) * step_size
+	xpos += dx
+	ypos += dy
+
+
+func move_to(x, y):
+	position = Vector2(x, y) * step_size
+	xpos = x
+	ypos = y
