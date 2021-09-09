@@ -56,7 +56,7 @@ func test_ok_to_move():
 	assert(ok_to_move(tshape, 0, 0))
 	assert(ok_to_move(tshape, 8, 18))
 	assert(not ok_to_move(tshape, -1, 0))
-	assert(not ok_to_move(tshape, 0, -1))
+	assert(ok_to_move(tshape, 0, -1))
 	assert(not ok_to_move(tshape, 9, 0))
 	assert(not ok_to_move(tshape, 0, 19))
 	assert(not ok_to_move(tshape, -1, 18))
@@ -69,6 +69,10 @@ func test_add_shape_to_grid():
 	var tshape = TShape.new()
 	tshape.tsize = 2
 	tshape.tile_map = [[true, true], [true, true]]
+	tshape.add_child(Node.new())
+	tshape.add_child(Node.new())
+	tshape.add_child(Node.new())
+	tshape.add_child(Node.new())
 	add_shape_to_grid(tshape, 1, 1)
 	var sum = 0
 	for idx in grid.size():
