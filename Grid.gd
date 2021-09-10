@@ -3,22 +3,17 @@ extends Node2D
 var size = Vector2(10, 20)
 
 var grid: Array
-var nodes: Array
+var tiles: Array
+var step_size
 
 func _ready():
 	clear()
 
 func clear():
 	grid = []
-	nodes = nodes
+	tiles = []
 	grid.resize(size.x * size.y)
-	nodes.resize(size.x * size.y)
-
-func cell_full(x: int, y: int):
-	return grid[get_grid_index(x, y)] == true
-
-func get_grid_index(x: int, y: int):
-	return x + size.x * y
+	tiles.resize(size.x * size.y)
 
 func get_full_rows():
 	var rows = []
@@ -49,19 +44,20 @@ func ok_to_move(shape: TShape, xo: int, yo: int):
 					return false # Occupied cell
 	return true
 
-func add_shape_to_grid(shape: TShape, xo: int, yo: int):
+func add_shape_to_grid(shape: TShape):
+	step_size = shape.step_size # Useful place to set this value
 	var tile_idx = 0
 	for y in shape.tsize:
 		for x in shape.tsize:
 			if shape.tile_map[y][x]:
-				var idx = x + xo + (y + yo) * size.x
+				var idx = x + shape.xpos + (y + shape.ypos) * size.x
 				grid[idx] = true
-				nodes[idx] = shape.get_child(tile_idx)
+				tiles[idx] = shape.get_child(tile_idx)
 				tile_idx += 1
 
 func remove_rows(rows: Array):
 	# Get lowest row
-	# Move above to here
+	# Move rows above to here
 	var num_rows_in_block = 0
 	var row1 = rows.pop_front()
 	while row1 != null:
@@ -72,17 +68,23 @@ func remove_rows(rows: Array):
 			num_rows_in_block = 0
 		row1 = row2
 
+var not_testing = true
+
 func move_rows(to, n):
 	var idx
-	# Scan the rows to be moved from `to` to 0
+	# Scan the rows to be moved to from `to` to 0
 	for row in range(to, -1, -1):
 		for x in size.x:
 			var v = false
-			var node = null
+			var tile: Sprite = null
 			if row - n >= 0:
 				idx = (row - n) * size.x + x
 				v = grid[idx]
-				node = nodes[idx]
+				tile = tiles[idx]
 			idx = row * size.x + x
 			grid[idx] = v
-			nodes[idx] = node
+			if to - row < n and not_testing:
+				tiles[idx].queue_free() # Delete tile to be removed
+			tiles[idx] = tile
+			if tile != null:
+				tile.position.y += step_size * n

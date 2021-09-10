@@ -21,16 +21,16 @@ func add_new_shape():
 	tshape.move_to(4, -2)
 
 func resume_game():
-	print("resume_game")
+	pass
 
 func reset_game():
-	print("reset_game")
+	pass
 
 func start_moving_left():
 	move(-1, 0)
 
 func stop_moving_left():
-	print("stop_moving_left")
+	pass
 
 func fast_move_left():
 	move(-1, 0)
@@ -42,7 +42,7 @@ func start_moving_right():
 	move(1, 0)
 
 func stop_moving_right():
-	print("stop_moving_right")
+	pass
 
 func move_down():
 	move(0, 1)
@@ -60,7 +60,7 @@ func try_rotate_right():
 		tshape.rotate()
 
 func hold_piece():
-	print("hold_piece")
+	pass
 
 func hard_drop():
 	ok = true
@@ -71,10 +71,9 @@ func hard_drop():
 func pause_game():
 	timer1.stop()
 	game_state = PAUSED
-	print("Paused")
 
 func quit_game():
-	print("quit_game")
+	get_tree().quit()
 
 func move(x, y):
 	ok = Grid.ok_to_move(tshape, tshape.xpos + x, tshape.ypos + y)
@@ -82,12 +81,10 @@ func move(x, y):
 		tshape.move(x, y)
 
 func embed_shape():
-	Grid.add_shape_to_grid(tshape, tshape.xpos, tshape.ypos)
+	Grid.add_shape_to_grid(tshape)
 	tshape.reparent_tiles($Area)
 	tshape.queue_free()
 	var full_rows = Grid.get_full_rows()
-	var num_rows = full_rows.size()
-	if num_rows > 0:
+	if full_rows.size() > 0:
 		Grid.remove_rows(full_rows)
-	#pause_game()
 	add_new_shape()

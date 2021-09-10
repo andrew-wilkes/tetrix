@@ -4,11 +4,10 @@ func _ready():
 	run_tests()
 
 func run_tests():
+	not_testing = false
 	size = Vector2(10, 20)
 	clear()
 	test_clear()
-	test_get_grid_index()
-	test_cell_full()
 	test_get_full_rows()
 	test_ok_to_move()
 	test_add_shape_to_grid()
@@ -17,18 +16,6 @@ func run_tests():
 
 func test_clear():
 	assert(grid.size() == size.x * size. y)
-
-func test_cell_full():
-	grid[0] = false
-	assert(not cell_full(0, 0))
-	grid[0] = true
-	assert(cell_full(0, 0))
-	grid[0] = null
-	assert(not cell_full(0, 0))
-	
-func test_get_grid_index():
-	for n in grid.size():
-		assert(n == get_grid_index(n % 10, n / 10))
 
 func test_get_full_rows():
 	clear()
@@ -73,7 +60,9 @@ func test_add_shape_to_grid():
 	tshape.add_child(Node.new())
 	tshape.add_child(Node.new())
 	tshape.add_child(Node.new())
-	add_shape_to_grid(tshape, 1, 1)
+	tshape.xpos = 1
+	tshape.ypos = 1
+	add_shape_to_grid(tshape)
 	var sum = 0
 	for idx in grid.size():
 		if grid[idx]:
